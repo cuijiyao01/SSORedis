@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+  <title>欢迎登录</title>
+</head>
+<body>
+<div class="wrapper" align="center">
+  <div class="container">
+    <h1>登录界面</h1>
+    <br>
+    <br>
+    <div><span th:text="${errMsg}" style="color:red;"/></div>
+    <br>
+    <form th:action="@{/user/login}" method="post">
+      <font size="4">Username:</font> <input type="text" value="" name="username" placeholder=""
+                                             style="font-size:20px" size="18"/><br><br>
+      <font size="4">Password:</font> <input type="password" value="" name="password" placeholder=""
+                                             style="font-size:20px" size="18"/><br><br>
+      <input type="hidden" name="redirect" th:value="${redirect}">
+      <input type="submit" value="Submit" style='font-size:18px'/>
+      &nbsp;&nbsp;&nbsp;
+      <input type="reset" value="Reset" style='font-size:18px'/>
+    </form>
+  </div>
+</div>
+</body>
+</html>
