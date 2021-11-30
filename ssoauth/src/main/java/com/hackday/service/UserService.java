@@ -3,15 +3,14 @@ package com.hackday.service;
 import com.hackday.dao.UserMapper;
 import com.hackday.domain.Result;
 import com.hackday.domain.User;
-import com.hackday.manage.JedisClient;
 import com.hackday.utils.CookieUtils;
 import com.hackday.utils.JsonUtils;
 import com.hackday.utils.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -29,9 +28,6 @@ public class UserService {
 
   @Autowired
   private UserMapper userMapper;
-
-  @Autowired
-  private JedisClient jedisClient;
 
   @Autowired
   private StringRedisTemplate stringRedisTemplate;
@@ -92,7 +88,7 @@ public class UserService {
   }
 
   public void logout(String token) {
-    jedisClient.del(REDIS_USER_SESSION_KEY + ":" + token);
+    stringRedisTemplate.delete(REDIS_USER_SESSION_KEY + ":" + token);
   }
 
 }
