@@ -25,6 +25,7 @@ public class UserLoginHandlerInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     String token = CookieUtils.getCookieValue(request, COOKIE_NAME);
+    token = StringUtils.isNotEmpty(token) ? token : request.getParameter(COOKIE_NAME);
     if (StringUtils.isEmpty(token)) {
       // 跳转到登录页面，把用户请求的url作为参数传递给登录页面。
       response.sendRedirect("http://localhost:8080/loginIndex?redirect=" + request.getRequestURL());
